@@ -26,7 +26,6 @@ const validatedChannelName = (name) => {
 
 // Handle team_join event
 boltApp.event("team_join", async ({ event, client }) => {
-  console.log("team_join triggred");
   try {
     // Extract user information
     const { user } = event;
@@ -39,6 +38,7 @@ boltApp.event("team_join", async ({ event, client }) => {
       name: channelName,
       is_private: true,
     });
+    console.log(result);
 
     // Invite the user to the channel
     await client.conversations.invite({

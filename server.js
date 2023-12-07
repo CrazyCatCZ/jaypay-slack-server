@@ -10,16 +10,6 @@ dotenv.config();
 // Middleware to parse raw request bodies as JSON
 app.use("/slack/events", express.raw({ type: "application/json" }));
 
-app.post("/slack/events", (req, res) => {
-  const { challenge } = req.body;
-
-  console.log(challenge);
-
-  res.send({ challenge });
-});
-
-console.log(process.env.SIGNING_SECRET);
-
 // Initialize Slack Bolt App
 const boltApp = new App({
   signingSecret: process.env.SIGNING_SECRET,
@@ -74,3 +64,11 @@ app.listen(port, () => {
 
   console.log("⚡️ Bolt app is running!");
 })();
+
+app.post("/slack/events", (req, res) => {
+  const { challenge } = req.body;
+
+  console.log(challenge);
+
+  res.send({ challenge });
+});

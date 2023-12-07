@@ -31,20 +31,20 @@ boltApp.event("team_join", async ({ event, client }) => {
 
   // Create a private channel with the user's name
   const channelName = validatedChannelName(user.name.toLowerCase());
-  const result = client.conversations.create({
+  const result = await client.conversations.create({
     name: channelName,
     is_private: true,
   });
   console.log(result);
 
   // Invite the user to the channel
-  client.conversations.invite({
+  await client.conversations.invite({
     channel: result.channel.id,
     users: user.id,
   });
 
   // Send a welcome message
-  client.chat.postMessage({
+  await client.chat.postMessage({
     channel: result.channel.id,
     text: `Welcome, ${user.name}! This is your private channel.`,
   });

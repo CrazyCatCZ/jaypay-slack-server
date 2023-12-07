@@ -31,6 +31,8 @@ boltApp.event("team_join", async ({ event, client }) => {
     // Extract user information
     const { user } = event;
 
+    console.log(user);
+
     // Create a private channel with the user's name
     const channelName = validatedChannelName(user.name.toLowerCase());
     const result = await client.conversations.create({

@@ -26,34 +26,28 @@ const validatedChannelName = (name) => {
 
 // Handle team_join event
 boltApp.event("team_join", async ({ event, client }) => {
-  try {
-    // Extract user information
-    const { user } = event;
+  // Extract user information
+  const { user } = event;
 
-    console.log(user);
+  // Create a private channel with the user's name
+  const channelName = validatedChannelName(user.name.toLowerCase());
+  const result = client.conversations.create({
+    name: channelName,
+    is_private: true,
+  });
+  console.log(result);
 
-    // Create a private channel with the user's name
-    const channelName = validatedChannelName(user.name.toLowerCase());
-    const result = await client.conversations.create({
-      name: channelName,
-      is_private: true,
-    });
-    console.log(result);
+  // Invite the user to the channel
+  client.conversations.invite({
+    channel: result.channel.id,
+    users: user.id,
+  });
 
-    // Invite the user to the channel
-    await client.conversations.invite({
-      channel: result.channel.id,
-      users: user.id,
-    });
-
-    // Send a welcome message
-    await client.chat.postMessage({
-      channel: result.channel.id,
-      text: `Welcome, ${user.name}! This is your private channel.`,
-    });
-  } catch (error) {
-    console.error("Error handling team_join event:", error);
-  }
+  // Send a welcome message
+  client.chat.postMessage({
+    channel: result.channel.id,
+    text: `Welcome, ${user.name}! This is your private channel.`,
+  });
 });
 
 // Start the Slack Bolt app

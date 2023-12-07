@@ -15,7 +15,7 @@ app.post("/slack/events", (req, res) => {
 
   console.log(challenge);
 
-  return res.send({ challenge });
+  res.send({ challenge });
 });
 
 console.log(process.env.SIGNING_SECRET);

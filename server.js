@@ -39,7 +39,7 @@ boltApp.event("team_join", async ({ event, client }) => {
 
   // Invite the user to the channel
   await client.conversations.invite({
-    channel: result.channel.id,
+    channel: "TEST",
     users: user.id,
   });
 

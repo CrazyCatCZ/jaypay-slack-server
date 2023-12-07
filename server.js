@@ -53,11 +53,6 @@ boltApp.event("team_join", async ({ event, client }) => {
   }
 });
 
-// Start the Express app
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-
 // Start the Slack Bolt app
 (async () => {
   await boltApp.start(process.env.PORT || 3000);

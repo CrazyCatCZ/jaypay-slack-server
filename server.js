@@ -3,7 +3,7 @@ const { App } = require("@slack/bolt");
 const dotenv = require("dotenv");
 
 const app = express();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 dotenv.config();
 
@@ -55,15 +55,7 @@ boltApp.event("team_join", async ({ event, client }) => {
 
 // Start the Slack Bolt app
 (async () => {
-  await boltApp.start(process.env.PORT || 3000);
+  await boltApp.start(PORT);
 
   console.log("⚡️ Bolt app is running!");
 })();
-
-app.post("/slack/events", (req, res) => {
-  const { challenge } = req.body;
-
-  console.log(challenge);
-
-  res.send({ challenge });
-});

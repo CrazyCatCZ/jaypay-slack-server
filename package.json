@@ -1,0 +1,15 @@
+{
+  "name": "jaypay-slack-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jakub Plecháč",
+  "license": "ISC",
+  "dependencies": {
+    "@slack/bolt": "^3.16.0",
+    "dotenv": "^16.3.1"
+  }
+}

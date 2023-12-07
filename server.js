@@ -3,7 +3,7 @@ const { App } = require("@slack/bolt");
 const dotenv = require("dotenv");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 dotenv.config();
 
@@ -30,7 +30,7 @@ boltApp.event("team_join", async ({ event, client }) => {
   const { user } = event;
 
   // Create a private channel with the user's name
-  const channelName = validatedChannelName(user.name.toLowerCase());
+  const channelName = user.name;
   const result = await client.conversations.create({
     name: channelName,
     is_private: true,

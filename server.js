@@ -13,6 +13,8 @@ app.use("/slack/events", express.raw({ type: "application/json" }));
 app.post("/slack/events", (req, res) => {
   const { challenge } = req.body;
 
+  console.log(challenge);
+
   return res.send({ challenge });
 });
 

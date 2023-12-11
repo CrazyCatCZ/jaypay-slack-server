@@ -18,11 +18,14 @@ const boltApp = new App({
   processBeforeResponse: true,
 });
 
-const validatedChannelName = (name) => {
+const validatedChannelName = async (name, client) => {
   // Replace invalid characters with underscores
-  const sanitized = name.replace(/[^a-z0-9-_]/g, "_");
+  let sanitized = name.replace(/[^a-z0-9-_]/g, "_");
+  const result = await web.conversations.list();
+  if ((existingChannels = result.channels.map((channel) => channel.name))) {
+    sanitized = sanitized + "1";
+  }
 
-  // Ensure the length is 21 characters or less
   return sanitized.substring(0, 21);
 };
 
@@ -36,9 +39,9 @@ boltApp.event("team_join", async ({ event, client }) => {
     processedEventsCache.add(user.id);
 
     // Create a private channel with the user's name
-    const channelName = user.name;
+    const channelName = validatedChannelName(user.name, client);
     const result = await client.conversations.create({
-      name: "testttt",
+      name: channelName,
       is_private: true,
     });
 

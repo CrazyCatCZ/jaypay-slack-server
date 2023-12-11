@@ -26,7 +26,7 @@ const validatedChannelName = (name) => {
 };
 
 // Handle team_join event
-boltApp.event("team_join", async ({ event, ack, client }) => {
+boltApp.event("team_join", async ({ event, ack, say, client }) => {
   await ack();
 
   // Extract user information

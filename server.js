@@ -38,10 +38,7 @@ boltApp.event("team_join", async ({ event, client }) => {
     processedEventsCache.add(user.id);
 
     // Create a private channel with the user's name
-    const channelName = await validateChannelName(
-      user.id.toLowerCase(),
-      client
-    );
+    const channelName = await validateChannelName("u069fbe04kg", client);
 
     console.log(channelName);
 

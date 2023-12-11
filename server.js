@@ -26,14 +26,16 @@ const validatedChannelName = (name) => {
 };
 
 // Handle team_join event
-boltApp.event("team_join", async ({ event, client }) => {
+boltApp.event("team_join", async ({ event, ack, client }) => {
+  await ack();
+
   // Extract user information
   const { user } = event;
 
   // Create a private channel with the user's name
   const channelName = user.name;
   const result = await client.conversations.create({
-    name: "test6",
+    name: channelName,
     is_private: true,
   });
   console.log(result);

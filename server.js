@@ -14,6 +14,7 @@ app.use("/slack/events", express.raw({ type: "application/json" }));
 const boltApp = new App({
   signingSecret: process.env.SIGNING_SECRET,
   token: process.env.API_KEY,
+  processBeforeResponse: true,
 });
 
 const validatedChannelName = (name) => {

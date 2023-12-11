@@ -21,7 +21,7 @@ const boltApp = new App({
 const validatedChannelName = async (name, client) => {
   // Replace invalid characters with underscores
   let sanitized = name.replace(/[^a-z0-9-_]/g, "_");
-  const result = await web.conversations.list();
+  const result = await client.conversations.list();
   if ((existingChannels = result.channels.map((channel) => channel.name))) {
     sanitized = sanitized + "1";
   }

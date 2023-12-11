@@ -3,6 +3,7 @@ const { App } = require("@slack/bolt");
 const dotenv = require("dotenv");
 
 const app = express();
+const processedEventsCache = new Set();
 const PORT = process.env.PORT || 3000;
 
 dotenv.config();

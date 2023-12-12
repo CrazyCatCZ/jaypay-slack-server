@@ -1,4 +1,3 @@
-const fs = require("fs-extra");
 const dotenv = require("dotenv");
 const express = require("express");
 const { App } = require("@slack/bolt");
@@ -6,6 +5,11 @@ const { App } = require("@slack/bolt");
 const app = express();
 const processedEventsCache = new Set();
 const PORT = process.env.PORT || 3000;
+
+const data = {
+  welcome_message:
+    "👋 Welcome to your private Slack channel!\n\nTake a quick peek at the #welcome channel for important info.\n\nReady to discuss more about your project? Pick a time that suits you on our [Meeting Scheduler](https://jaypay.setmore.com/jakubplechac).\n\nFeel free to ask any questions and share your thoughts.",
+};
 
 dotenv.config();
 
@@ -33,8 +37,6 @@ const validateChannelName = async (channelName, client) => {
 boltApp.event("team_join", async ({ event, client }) => {
   // Extract user information
   const { user } = event;
-  const file = await fs.readFile(process.cwd() + "/app/data.json", "utf8");
-  const data = JSON.parse(file);
 
   // Check if the user has been processed
   if (!processedEventsCache.has(user.id)) {
@@ -62,7 +64,7 @@ boltApp.event("team_join", async ({ event, client }) => {
     // Send a welcome message
     await client.chat.postMessage({
       channel: result.channel.id,
-      text: data.welcome_message,
+      text: data["welcome_message"],
     });
   }
 });

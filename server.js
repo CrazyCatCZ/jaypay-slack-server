@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 const data = {
   welcome_message:
-    "👋 Welcome to your private Slack channel!\n\nTake a quick peek at the #welcome channel for important info.\n\nReady to discuss more about your project? Pick a time that suits you on our [Meeting Scheduler](https://jaypay.setmore.com/jakubplechac).\n\nFeel free to ask any questions and share your thoughts.",
+    "👋 Welcome to your private Slack channel!\n\nTake a quick peek at the <#welcome|welcome> channel for important info.\n\nReady to discuss more about your project? Pick a time that suits you on our <https://jaypay.setmore.com/jakubplechac|Meeting Scheduler>.\n\nFeel free to ask any questions and share your thoughts.",
 };
 
 dotenv.config();

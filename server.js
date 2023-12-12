@@ -36,7 +36,7 @@ boltApp.event("team_join", async ({ event, client }) => {
   const { user } = event;
 
   const data = {
-    welcome_message: `:wave: Welcome to your private Slack channel <@${user.id}>!\n\nTake a quick peek at the <#${WELCOME_CHANNEL_ID}> channel for important info.\n\nReady to discuss more about your project? Pick a time that suits you on our <https://jaypay.setmore.com/jakubplechac|Meeting Scheduler>.\n\nFeel free to ask any questions and share your thoughts.`,
+    welcome_message: `:wave: Welcome to your private Slack channel <@${user.id}>!\n\nTake a quick peek at the <#${WELCOME_CHANNEL_ID}> channel for important info.\n\nReady to discuss more your project? Pick a time that suits you on our <https://jaypay.setmore.com/jakubplechac|Meeting Scheduler>.\n\nFeel free to ask any questions and share your thoughts.`,
   };
 
   // Check if the user has been processed

@@ -33,7 +33,7 @@ const validateChannelName = async (channelName, client) => {
 boltApp.event("team_join", async ({ event, client }) => {
   // Extract user information
   const { user } = event;
-  const welcomeMessage = JSON.parse(fs.readFileSync("data.json", "utf8"));
+  const welcomeMessage = JSON.parse(fs.readFileSync("./data.json", "utf8"));
 
   // Check if the user has been processed
   if (!processedEventsCache.has(user.id)) {

@@ -1,6 +1,7 @@
+const fs = require("fs-extra");
+const dotenv = require("dotenv");
 const express = require("express");
 const { App } = require("@slack/bolt");
-const dotenv = require("dotenv");
 
 const app = express();
 const processedEventsCache = new Set();
@@ -32,6 +33,7 @@ const validateChannelName = async (channelName, client) => {
 boltApp.event("team_join", async ({ event, client }) => {
   // Extract user information
   const { user } = event;
+  const welcomeMessage = JSON.parse(fs.readFileSync("data.json", "utf8"));
 
   // Check if the user has been processed
   if (!processedEventsCache.has(user.id)) {
@@ -59,7 +61,7 @@ boltApp.event("team_join", async ({ event, client }) => {
     // Send a welcome message
     await client.chat.postMessage({
       channel: result.channel.id,
-      text: `Welcome, ${user.name}! This is your private channel.`,
+      text: welcomeMessage,
     });
   }
 });

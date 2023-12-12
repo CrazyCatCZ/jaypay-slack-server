@@ -7,8 +7,7 @@ const processedEventsCache = new Set();
 const PORT = process.env.PORT || 3000;
 
 const data = {
-  welcome_message:
-    "👋 Welcome to your private Slack channel!\n\nTake a quick peek at the <#welcome|welcome> channel for important info.\n\nReady to discuss more about your project? Pick a time that suits you on our <https://jaypay.setmore.com/jakubplechac|Meeting Scheduler>.\n\nFeel free to ask any questions and share your thoughts.",
+  welcome_message: `👋 Welcome to your private Slack channel <@userID>!\n\nTake a quick peek at the <#welcome|welcome> channel for important info.\n\nReady to discuss more about your project? Pick a time that suits you on our <https://jaypay.setmore.com/jakubplechac|Meeting Scheduler>.\n\nFeel free to ask any questions and share your thoughts.`,
 };
 
 dotenv.config();
@@ -37,6 +36,10 @@ const validateChannelName = async (channelName, client) => {
 boltApp.event("team_join", async ({ event, client }) => {
   // Extract user information
   const { user } = event;
+
+  const data = {
+    welcome_message: `👋 Welcome to your private Slack channel <@${user.id}>!\n\nTake a quick peek at the <#welcome|welcome> channel for important info.\n\nReady to discuss more about your project? Pick a time that suits you on our <https://jaypay.setmore.com/jakubplechac|Meeting Scheduler>.\n\nFeel free to ask any questions and share your thoughts.`,
+  };
 
   // Check if the user has been processed
   if (!processedEventsCache.has(user.id)) {
